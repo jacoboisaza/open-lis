@@ -1,0 +1,7 @@
+version: "3"
+services:
+  lis_ui:
+    build: ./lis_ui
+    image: lis_ui
+    ports:
+      - "8081:80"

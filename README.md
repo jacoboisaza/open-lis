@@ -24,7 +24,7 @@ Codebase and documentation for an Open Source Micro-LIS for COVID-19 emergency
 * - Install Vue Cli globally: npm install -g @vue/cli @vue/cli-service-global
 * - Install [Chrome](https://www.google.com/chrome/) and add these extensions (vue-devtools, JSONView and Postman)
 * - Install npm dependencies: npm i
-* - Start vitri_ui [locally](http://localhost:8080/) with: npm run serve
+* - Start lis_ui [locally](http://localhost:8080/) with: npm run serve
 
 # Contribution guidelines
 
