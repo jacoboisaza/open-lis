@@ -1,21 +1,84 @@
 <template>
-  <v-app>
-    <!-- <lis-snackbar /> -->
-    <!-- <lis-navbars /> -->
+  <v-app v-cloak id="lis">
     <v-content>
       <router-view></router-view>
     </v-content>
+
+    <!-- Navigation and Actions -->
+    <template v-if="$route.name != 'login'">
+      <LisNavBar :user-roles="user.roles" />
+
+      <!-- New patient action -->
+      <v-btn
+        v-if="user.roles.indexOf('client') >= 0"
+        bottom
+        color="purple"
+        dark
+        fab
+        fixed
+        right
+        @click="newPatient = !newPatient"
+      >
+        <v-icon>mdi-account-plus</v-icon>
+      </v-btn>
+      <v-dialog v-model="newPatient" max-width="1200px">
+        <v-card>
+          <LisNewPatient />
+        </v-card>
+      </v-dialog>
+
+      <!-- New test action -->
+      <v-btn
+        v-if="user.roles.indexOf('lab') >= 0"
+        bottom
+        color="orange"
+        dark
+        fab
+        fixed
+        right
+        @click="newTest = !newTest"
+      >
+        <v-icon>mdi-test-tube</v-icon>
+      </v-btn>
+      <v-dialog v-model="newTest" max-width="1200px">
+        <v-card>
+          <LisNewTest />
+        </v-card>
+      </v-dialog>
+
+      <LisFooter />
+    </template>
   </v-app>
 </template>
 
 <script>
+import LisNavBar from "@/components/LisNavBar.vue";
+import LisNewPatient from "@/components/LisNewPatient.vue";
+import LisNewTest from "@/components/LisNewTest.vue";
+import LisFooter from "@/components/LisFooter.vue";
+
 export default {
   name: "Lis",
-  data: () => ({})
+  components: {
+    LisNavBar,
+    LisNewPatient,
+    LisNewTest,
+    LisFooter
+  },
+  data: () => ({
+    newPatient: false,
+    newTest: false,
+    user: {
+      roles: ["lab", "admin"]
+    }
+  })
 };
 </script>
 
 <style>
+[v-cloak] {
+  display: none;
+}
 /* Google font: roboto 100, 300, regular, 500, 700, 900 - latin */
 @font-face {
   font-family: "Roboto";

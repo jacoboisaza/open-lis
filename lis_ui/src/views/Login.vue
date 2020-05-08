@@ -64,32 +64,6 @@
       </v-col>
     </v-row>
 
-    <v-footer dark absolute max-width="1900px" mx-auto>
-      <a
-        href="https://creativecommons.org/licenses/by-nc-sa/3.0/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <v-img
-          :src="require('../assets/copyleft-light.png')"
-          max-width="16px"
-          class="d-block mx-auto"
-        ></v-img>
-      </a>
-      <v-spacer></v-spacer>
-      <a
-        href="https://github.com/jacoboisaza/open-lis"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <v-img
-          :src="require('../assets/github-light.png')"
-          max-width="16px"
-          class="d-block mx-auto"
-        ></v-img>
-      </a>
-    </v-footer>
-
     <v-snackbar v-model="loginFailed">
       Sorry, account not found.
       <v-btn text class="display-1" @click="loginFailed = false">🧐</v-btn>
