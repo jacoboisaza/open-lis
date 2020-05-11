@@ -54,6 +54,12 @@ const routes = [
       import(/* webpackChunkName: "logout" */ "../views/Logout.vue")
   },
   {
+    // Home page for Lab's users
+    path: "/lab",
+    name: "lab",
+    redirect: { name: "lab-pending" }
+  },
+  {
     path: "/lab/pending",
     name: "lab-pending",
     meta: {
@@ -94,6 +100,12 @@ const routes = [
     },
     component: () =>
       import(/* webpackChunkName: "lab-incoming" */ "../views/lab/Incoming.vue")
+  },
+  {
+    // Home page for Client's users
+    path: "/client",
+    name: "client",
+    redirect: { name: "client-patients" }
   },
   {
     path: "/client/patients",
