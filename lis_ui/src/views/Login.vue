@@ -72,7 +72,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import UserApi from "@/services/User.js";
 
 export default {
   name: "Login",
@@ -91,9 +91,7 @@ export default {
         required(value) {
           return !!value || "Required Field";
         }
-      },
-      // TODO: Replace this base url creating a global Axios instance
-      BaseApiUrl: this.$configs.lisAuthBaseUrl
+      }
     };
   },
   methods: {
@@ -102,13 +100,11 @@ export default {
       var data = this;
       data.loginFailed = false;
       if (data.$refs.loginForm.validate()) {
-        // Send data to API
-        axios
-          // TODO: Replace the GET with commented POST when LIS API is ready
-          .get(data.BaseApiUrl + "users/" + data.user.id)
+        UserApi.login(data.user)
           .then(response => {
+            // TODO: Implement vuex to login the user
             data.$router.push({
-              name: "home",
+              name: data.user.type,
               params: { user: response.data }
             });
           })
