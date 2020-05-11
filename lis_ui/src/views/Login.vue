@@ -19,17 +19,17 @@
           <v-form ref="loginForm" lazy-validation @submit.prevent="tryLogin">
             <v-card-text>
               <v-text-field
-                v-model.trim="user.id"
+                v-model.trim="credentials.id"
                 autofocus
                 label="User"
                 required
                 :rules="[formRules.required]"
                 :prepend-icon="
-                  user.type === 'lab' ? 'mdi-test-tube' : 'mdi-doctor'
+                  credentials.type === 'lab' ? 'mdi-test-tube' : 'mdi-doctor'
                 "
               />
               <v-text-field
-                v-model="user.password"
+                v-model="credentials.password"
                 label="Password"
                 :type="showPassword ? 'text' : 'password'"
                 :rules="[formRules.required]"
@@ -38,7 +38,7 @@
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 @click:append="showPassword = !showPassword"
               />
-              <v-radio-group v-model="user.type" :mandatory="false">
+              <v-radio-group v-model="credentials.type" :mandatory="false">
                 <v-radio label="Im a Client" value="client"></v-radio>
                 <v-radio label="Im a Lab Tech" value="lab"></v-radio>
               </v-radio-group>
@@ -47,7 +47,7 @@
               <v-btn block type="submit" color="info"
                 >LOG IN
                 <v-icon dark right>{{
-                  user.type === "lab" ? "mdi-test-tube" : "mdi-doctor"
+                  credentials.type === "lab" ? "mdi-test-tube" : "mdi-doctor"
                 }}</v-icon>
               </v-btn>
             </v-card-actions>
@@ -78,7 +78,7 @@ export default {
   name: "Login",
   data() {
     return {
-      user: {
+      credentials: {
         id: "",
         password: "",
         type: "client"
@@ -100,12 +100,11 @@ export default {
       var data = this;
       data.loginFailed = false;
       if (data.$refs.loginForm.validate()) {
-        UserApi.login(data.user)
+        UserApi.login(data.credentials)
           .then(response => {
             // TODO: Implement vuex to login the user
             data.$router.push({
-              name: data.user.type,
-              params: { user: response.data }
+              name: data.credentials.type
             });
           })
           .catch(error => {
