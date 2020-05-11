@@ -98,9 +98,9 @@ export default {
   },
   methods: {
     tryLogin() {
+      // Test form and login
       var data = this;
       data.loginFailed = false;
-      // Test form formRules
       if (data.$refs.loginForm.validate()) {
         // Send data to API
         axios

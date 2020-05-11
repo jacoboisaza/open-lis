@@ -68,6 +68,7 @@ export default {
   data: () => ({
     newPatient: false,
     newTest: false,
+    // TODO: Implement vuex to read the user logged
     user: {
       roles: ["lab", "admin"]
     }
