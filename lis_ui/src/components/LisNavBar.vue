@@ -129,29 +129,25 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "LisNavBar",
-
-  props: {
-    userRoles: {
-      type: Array,
-      required: true
-    }
-  },
   data: () => ({
     query: "",
     sideBar: null,
     sideBarMini: true
   }),
   computed: {
-    // build menus filtered by userRoles
+    ...mapState(["user"]),
+    // build menus filtered by user.roles
     userMenus() {
       var that = this;
       return this.$router.options.routes.filter(route => {
         return (
           route.meta &&
           route.meta.roles.filter(routeRole => {
-            return that.userRoles.some(userRole => {
+            return that.user.roles.some(userRole => {
               return userRole === routeRole;
             });
           }).length > 0

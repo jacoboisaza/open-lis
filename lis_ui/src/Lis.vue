@@ -6,7 +6,7 @@
 
     <!-- Navigation and Actions -->
     <template v-if="$route.name != 'login'">
-      <LisNavBar :user-roles="user.roles" />
+      <LisNavBar />
 
       <!-- New patient action -->
       <v-btn
@@ -56,6 +56,7 @@ import LisNavBar from "@/components/LisNavBar.vue";
 import LisNewPatient from "@/components/LisNewPatient.vue";
 import LisNewTest from "@/components/LisNewTest.vue";
 import LisFooter from "@/components/LisFooter.vue";
+import { mapState } from "vuex";
 
 export default {
   name: "Lis",
@@ -67,12 +68,11 @@ export default {
   },
   data: () => ({
     newPatient: false,
-    newTest: false,
-    // TODO: Implement vuex to read the user logged
-    user: {
-      roles: ["lab", "admin"]
-    }
-  })
+    newTest: false
+  }),
+  computed: {
+    ...mapState(["user"])
+  }
 };
 </script>
 
