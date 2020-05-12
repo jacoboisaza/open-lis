@@ -7,16 +7,10 @@ import "@babel/polyfill";
 import "roboto-fontface/css/roboto/roboto-fontface.css";
 import "@mdi/font/css/materialdesignicons.css";
 
-Vue.config.productionTip = false;
-
 // Set global config variables
+Vue.config.productionTip = false;
 Vue.prototype.$configs = {};
 Vue.prototype.$configs.adminMail = "covidopenlis@gmail.com";
-if (process.env.NODE_ENV === "production") {
-  Vue.prototype.$configs.lisAuthBaseUrl = "http://localhost:3000/";
-} else {
-  Vue.prototype.$configs.lisAuthBaseUrl = "http://localhost:3000/";
-}
 
 new Vue({
   router,
