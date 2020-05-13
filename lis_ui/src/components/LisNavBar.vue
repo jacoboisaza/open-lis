@@ -145,6 +145,7 @@ export default {
       var that = this;
       return this.$router.options.routes.filter(route => {
         return (
+          that.user.roles &&
           route.meta &&
           route.meta.roles.filter(routeRole => {
             return that.user.roles.some(userRole => {

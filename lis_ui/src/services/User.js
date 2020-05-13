@@ -1,4 +1,3 @@
-import Vue from "vue";
 import axios from "axios";
 
 var apiClient = axios.create({
@@ -11,8 +10,8 @@ var apiClient = axios.create({
 });
 
 export default {
-  login(user) {
+  login(credentials) {
     // TODO: Implement POST for the real LIS API
-    return apiClient.get("users/" + user.id);
+    return apiClient.get("users/" + credentials.id);
   }
 };

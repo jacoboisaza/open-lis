@@ -10,7 +10,7 @@
 
       <!-- New patient action -->
       <v-btn
-        v-if="user.roles.indexOf('client') >= 0"
+        v-if="user.roles && user.roles.indexOf('client') >= 0"
         bottom
         color="purple"
         dark
@@ -29,7 +29,7 @@
 
       <!-- New test action -->
       <v-btn
-        v-if="user.roles.indexOf('lab') >= 0"
+        v-if="user.roles && user.roles.indexOf('lab') >= 0"
         bottom
         color="orange"
         dark
