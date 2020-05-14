@@ -73,6 +73,7 @@
 
 <script>
 import UserApi from "@/services/User.js";
+import { mapState } from "vuex";
 
 export default {
   name: "Login",
@@ -93,6 +94,9 @@ export default {
         }
       }
     };
+  },
+  computed: {
+    ...mapState(["user"])
   },
   methods: {
     tryLogin() {
