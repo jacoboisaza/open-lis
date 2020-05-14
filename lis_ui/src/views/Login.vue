@@ -1,5 +1,27 @@
 <template>
-  <v-container>
+  <v-container v-if="user">
+    <v-row>
+      <v-col class="text-center">
+        <v-card class="pa-4 mx-auto mt-12" max-width="400">
+          <v-card-text class="title">
+            You are already logged in.
+          </v-card-text>
+          <v-card-actions>
+            <v-btn :to="{ name: homeRoute.name }" text color="success">
+              Go home?
+              <v-icon>{{ homeRoute.meta.icon }}</v-icon>
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn :to="{ name: 'logout' }" text color="primary">
+              Log Out?
+              <v-icon>{{ logOutRoute.meta.icon }}</v-icon>
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
+  <v-container v-else>
     <!-- Avatar -->
     <v-row>
       <v-col>
@@ -96,7 +118,20 @@ export default {
     };
   },
   computed: {
-    ...mapState(["user"])
+    ...mapState(["user"]),
+    homeRoute() {
+      var userRole = this.user.roles.filter(role => {
+        return role != "admin";
+      })[0];
+      return this.$router.resolve({
+        name: userRole
+      }).resolved;
+    },
+    logOutRoute() {
+      return this.$router.resolve({
+        name: "logout"
+      }).resolved;
+    }
   },
   methods: {
     tryLogin() {
