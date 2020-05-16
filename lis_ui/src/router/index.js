@@ -3,16 +3,23 @@ import VueRouter from "vue-router";
 import store from "@/store";
 
 Vue.use(VueRouter);
-
 const routes = [
   {
-    path: "/",
+    path: "/login",
     name: "login",
     meta: {
       roles: ["guest"]
     },
     component: () =>
       import(/* webpackChunkName: "login" */ "../views/Login.vue")
+  },
+  {
+    path: "/",
+    name: "home",
+    meta: {
+      requiresAuth: true
+    },
+    component: () => import(/* webpackChunkName: "login" */ "../views/Home.vue")
   },
   {
     path: "/lab/QC",
