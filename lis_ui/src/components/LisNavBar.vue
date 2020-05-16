@@ -129,7 +129,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "LisNavBar",
@@ -139,14 +139,18 @@ export default {
     sideBarMini: true
   }),
   computed: {
-    ...mapState(["user"]),
+    ...mapState({
+      user: state => state.user.user
+    }),
+    ...mapGetters("user", ["loggedIn"]),
     // build menus filtered by user.roles
     userMenus() {
       var that = this;
       return this.$router.options.routes.filter(route => {
         return (
-          that.user.roles &&
+          that.loggedIn &&
           route.meta &&
+          route.meta.roles &&
           route.meta.roles.filter(routeRole => {
             return that.user.roles.some(userRole => {
               return userRole === routeRole;

@@ -10,7 +10,7 @@
 
       <!-- New patient action -->
       <v-btn
-        v-if="user.roles && user.roles.indexOf('client') >= 0"
+        v-if="loggedIn && user.roles.indexOf('client') >= 0"
         bottom
         color="purple"
         dark
@@ -29,7 +29,7 @@
 
       <!-- New test action -->
       <v-btn
-        v-if="user.roles && user.roles.indexOf('lab') >= 0"
+        v-if="loggedIn && user.roles.indexOf('lab') >= 0"
         bottom
         color="orange"
         dark
@@ -56,7 +56,7 @@ import LisNavBar from "@/components/LisNavBar.vue";
 import LisNewPatient from "@/components/LisNewPatient.vue";
 import LisNewTest from "@/components/LisNewTest.vue";
 import LisFooter from "@/components/LisFooter.vue";
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "Lis",
@@ -71,7 +71,10 @@ export default {
     newTest: false
   }),
   computed: {
-    ...mapState(["user"])
+    ...mapState({
+      user: state => state.user.user
+    }),
+    ...mapGetters("user", ["loggedIn"])
   }
 };
 </script>
