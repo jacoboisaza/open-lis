@@ -10,8 +10,11 @@ var apiClient = axios.create({
 });
 
 export default {
+  // TODO: Implement POST for the real LIS APIs
   login(credentials) {
-    // TODO: Implement POST for the real LIS API
     return apiClient.get("users/" + credentials.id);
+  },
+  logout(user) {
+    return apiClient.get("users/" + user.id);
   }
 };
