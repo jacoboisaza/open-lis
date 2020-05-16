@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from "@/store";
 
 Vue.use(VueRouter);
 
@@ -17,6 +18,7 @@ const routes = [
     path: "/lab/QC",
     name: "lab-qc",
     meta: {
+      requiresAuth: true,
       roles: ["admin"],
       menu: "admin-nav",
       title: "QC",
@@ -31,6 +33,7 @@ const routes = [
     path: "/admin",
     name: "admin",
     meta: {
+      requiresAuth: true,
       roles: ["admin"],
       menu: "admin-nav",
       title: "Admin",
@@ -63,6 +66,7 @@ const routes = [
     path: "/lab/pending",
     name: "lab-pending",
     meta: {
+      requiresAuth: true,
       roles: ["lab"],
       menu: "main-nav",
       title: "Pending",
@@ -77,6 +81,7 @@ const routes = [
     path: "/lab/receive",
     name: "lab-receive",
     meta: {
+      requiresAuth: true,
       roles: ["lab"],
       menu: "main-nav",
       title: "Receive",
@@ -91,6 +96,7 @@ const routes = [
     path: "/lab/incoming",
     name: "lab-incoming",
     meta: {
+      requiresAuth: true,
       roles: ["lab"],
       menu: "main-nav",
       title: "Incoming",
@@ -111,6 +117,7 @@ const routes = [
     path: "/client/patients",
     name: "client-patients",
     meta: {
+      requiresAuth: true,
       roles: ["client"],
       menu: "main-nav",
       title: "Patients",
@@ -127,6 +134,7 @@ const routes = [
     path: "/client/samples",
     name: "client-samples",
     meta: {
+      requiresAuth: true,
       roles: ["client"],
       menu: "main-nav",
       title: "Samples",
@@ -143,6 +151,7 @@ const routes = [
     path: "/client/reports",
     name: "client-reports",
     meta: {
+      requiresAuth: true,
       roles: ["client"],
       menu: "main-nav",
       title: "Reports",
@@ -161,6 +170,21 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  // Autoload user from localStorage
+  store.commit("user/LOAD_USER");
+
+  // Validate "user isLoggedIn" if route requires auth
+  if (
+    !store.getters["user/loggedIn"] &&
+    to.matched.some(route => route.meta.requiresAuth)
+  ) {
+    next({ name: "login" });
+  }
+
+  next();
 });
 
 export default router;
