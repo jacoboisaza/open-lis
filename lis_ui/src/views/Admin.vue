@@ -191,7 +191,7 @@ export default {
 
   methods: {
     initialize() {
-      userApi.all().then(response => {
+      userApi.all({ roles: "lab" }).then(response => {
         this.users = response.data;
       });
     },

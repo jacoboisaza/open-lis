@@ -27,7 +27,14 @@ export default {
   delete(user) {
     return apiClient.delete("/users/" + user.id);
   },
-  all() {
-    return apiClient.get("/users/");
+  all(filter) {
+    var query = "";
+    debugger;
+    if (filter) {
+      const filterName = Object.keys(filter)[0],
+        filterKey = filter[filterName];
+      query = "?" + filterName + "_like=" + filterKey;
+    }
+    return apiClient.get("/users" + query);
   }
 };
