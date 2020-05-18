@@ -28,7 +28,8 @@ export const actions = {
   },
   login(userStore, credentials) {
     return userApi.login(credentials).then(response => {
-      userStore.commit("SET_USER", response.data);
+      const user = response.data[0] || response.data;
+      userStore.commit("SET_USER", user);
       userStore.commit("LOAD_USER");
     });
   },
@@ -42,6 +43,6 @@ export const actions = {
 };
 export const getters = {
   loggedIn(userState, getters) {
-    return !!userState.user;
+    return !!userState.user && !!userState.user.roles;
   }
 };

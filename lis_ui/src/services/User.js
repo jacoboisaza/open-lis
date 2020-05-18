@@ -12,7 +12,7 @@ const apiClient = axios.create({
 export default {
   // TODO: Implement POST for the real LIS APIs
   login(credentials) {
-    return apiClient.get("/users/" + credentials.id);
+    return apiClient.get("/users?app_id=" + credentials.id);
   },
   logout(user) {
     return apiClient.get("/users/" + user.id);
