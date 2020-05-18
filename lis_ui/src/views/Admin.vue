@@ -152,7 +152,6 @@ export default {
       { text: "Actions", value: "actions", sortable: false }
     ],
     users: [],
-    roles: [],
     editedIndex: -1,
     editedItem: {
       id: 0,
@@ -168,7 +167,6 @@ export default {
       app_id: "",
       name: "",
       email: "",
-      roles: [],
       created: "",
       status: "ok"
     }
@@ -195,9 +193,6 @@ export default {
     initialize() {
       userApi.all().then(response => {
         this.users = response.data;
-      });
-      userApi.roles().then(response => {
-        this.roles = response.data;
       });
     },
     editItem(item) {

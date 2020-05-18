@@ -29,8 +29,5 @@ export default {
   },
   all() {
     return apiClient.get("/users/");
-  },
-  roles() {
-    return apiClient.get("/roles/");
   }
 };

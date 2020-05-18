@@ -148,7 +148,6 @@ export default {
       if (data.$refs.loginForm.validate()) {
         this.login(data.credentials)
           .then(response => {
-            // TODO: Implement vuex to login the user
             data.$router.push({
               name: data.credentials.type
             });
